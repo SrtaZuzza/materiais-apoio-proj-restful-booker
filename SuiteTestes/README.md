@@ -10,7 +10,7 @@ Além de falar sobre o mercado de QA no vídeo 1, a playlist aborda o Rest Assur
 
 &nbsp;
 
-## Entendeno os testes 🤔
+## Entendendo os testes 🤔
 &nbsp;
 
 A Carolina já deu uma base enorme pra gente trabalhar. Nada melhor do que entender o que ela já fez pra gente dar continuidade ao processo!
@@ -55,8 +55,7 @@ E como isso poderia ser alterado? Acrescentando o parâmetro desejado antes do G
         Assertions.assertEquals(200, response.statusCode());    // GARANTA QUE O STATUS É O 200 (SUCESSO!)
     }
 ```
-Do mesmo jeito que eu coloquei o "firstname" aqui você pode colocar qualquer outro dos quatro parâmetros opcionais ou até mais de um ao mesmo tempo!  
-E para mais de um parâmetro eu escolhi usar um Hashmap por que esses valores serão sempre os mesmos, veja esse exemplo de criação de token:
+Do mesmo jeito que eu coloquei o "firstname" aqui você pode colocar qualquer outro dos quatro parâmetros opcionais ou até mais de um ao mesmo tempo! E para mais de um parâmetro eu escolhi usar um Hashmap por que esses valores serão sempre os mesmos, veja esse exemplo de criação de token:
 ```java
     @Test
     public void CreateAuthToken(){
