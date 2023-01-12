@@ -13,14 +13,17 @@ Além de falar sobre o mercado de QA no vídeo 1, a playlist aborda o Rest Assur
 ## Entendendo os testes 🤔
 &nbsp;
 
-A Carolina já deu uma base enorme pra gente trabalhar. Nada melhor do que entender o que ela já fez pra gente dar continuidade ao processo!
+A Carolina deixou muita coisa praticamente pronta. Nada melhor do que entender o que ela já fez pra gente dar continuidade ao processo!  
+&nbsp;
 
 ![Alt text](img/get_booking_ids.png)  
 
 Como podemos ver acima, "GetBookingIds" é uma requisição do tipo GET com 4 parâmetros opcionais.  
 &nbsp;  
 
-Abaixo temos um exemplo que pode levar um tempinho pra ser executado, por que ele retorna todos os ids cadastrados na API.  
+Abaixo temos um exemplo feito em aula que pode levar um tempinho pra ser executado, por que ele retorna todos os ids cadastrados na API.  
+&nbsp;
+
 ```java 
     @Test
     public void getAllBookingsById_returnOk(){
@@ -29,15 +32,17 @@ Abaixo temos um exemplo que pode levar um tempinho pra ser executado, por que el
                 .get("/booking")            // O TIPO DA REQUISIÇÃO É O GET
             .then()
                 .extract()
-                .response();
-
+                .response()
+        ;
 
         Assertions.assertNotNull(response);
         Assertions.assertEquals(200, response.statusCode());
     }
-```
+```  
+&nbsp;
 
-E como isso poderia ser alterado? Acrescentando o parâmetro desejado antes do GET, assim estamos especificando um pouco mais o que deve ser obtido:
+E como isso poderia ser alterado? Acrescentando o parâmetro desejado antes do GET, assim estamos especificando um pouco mais o que deve ser obtido:  
+&nbsp;
 
 ```java
     @Test
@@ -54,8 +59,12 @@ E como isso poderia ser alterado? Acrescentando o parâmetro desejado antes do G
         Assertions.assertNotNull(response);                     // GARANTA QUE O CAMPO NÃO ESTÁ VAZIO
         Assertions.assertEquals(200, response.statusCode());    // GARANTA QUE O STATUS É O 200 (SUCESSO!)
     }
-```
-Do mesmo jeito que eu coloquei o "firstname" aqui você pode colocar qualquer outro dos quatro parâmetros opcionais ou até mais de um ao mesmo tempo! E para mais de um parâmetro eu escolhi usar um Hashmap por que esses valores serão sempre os mesmos, veja esse exemplo de criação de token:
+```  
+&nbsp;
+
+Do mesmo jeito que eu coloquei o "firstname" aqui você pode colocar qualquer outro dos quatro parâmetros opcionais ou até mais de um ao mesmo tempo! E para mais de um parâmetro eu escolhi usar um Hashmap por que esses valores serão sempre os mesmos, veja esse exemplo de criação de token:  
+&nbsp;
+
 ```java
     @Test
     public void CreateAuthToken(){
@@ -101,7 +110,8 @@ No nosso projeto a inserção do campo "Content-Type" pode ser feita de 2 jeitos
 ![Alt text](../PostmanCollection/img/create_booking_request_body.png)  
 &nbsp;
 
-Pro caso do request body a Carolina já facilitou e muito a nossa vida, criando uma entity:
+Pro caso do request body a Carolina já facilitou e muito a nossa vida, criando uma entity:  
+&nbsp;
 
 ```java
     public Booking(String firstName, String lastName, float totalPrice, boolean depositPaid, BookingDates bookingDates, String additionalNeeds) {
@@ -112,8 +122,11 @@ Pro caso do request body a Carolina já facilitou e muito a nossa vida, criando 
         this.bookingdates = bookingDates;
         this.additionalneeds = additionalNeeds;
     }
-```
-E setando ela no início do documento de testes:
+```  
+&nbsp;
+
+E setando ela no início do documento de testes:  
+&nbsp;
 
 ```java
         bookingDates = new BookingDates("2018-01-02", "2018-01-03");
@@ -121,8 +134,11 @@ E setando ela no início do documento de testes:
                 (float)faker.number().randomDouble(2, 50, 100000),
                 true,bookingDates,
                 "");
-```
-Lembra quando acrescentamos esses parâmetros no postman? Olha como fazemos o mesmo aqui:
+```  
+&nbsp;
+
+Lembra quando acrescentamos esses parâmetros no postman? Olha como fazemos o mesmo aqui:  
+&nbsp;
 
 ```java
             .when()
@@ -162,10 +178,28 @@ Eu só consegui gerar o report fazendo exatamente o mesmo procedimento mostrado 
 ![Tela apresentando a extensão Maven Helper](img/extension_screen.png)  
 &nbsp;
 
-E em seguida siga os passos abaixo:  
+Depois de instalar tudo que é necessário é hora de preparar o projeto pra produzir nosso report. Antes de mais nada execute o comando "clean" no seu projeto pra que possamos deixar ele zerado pra receber as informações definitivas:  
+&nbsp;
+
+![Comando maven clean](img/maven_clean.png)  
+&nbsp;
+
+Em seguida vamos executar a suite de testes completa de uma só vez:  
+&nbsp;
+
+![Comando maven test](img/maven_test.png)  
+&nbsp;
+
+E em seguida siga os passos abaixo para a realizar a criação do Allure report:  
 &nbsp;
 
 ![Processo para gerar o allure report](img/allure_report.gif)  
+&nbsp;
+
+*Obs.: Não se esqueça de conferir se a pasta "site" está vazia ou não. Caso esteja vazia inicie novamente o processo a partir do comando "clean".*  
+&nbsp;
+
+![Checando a pasta site](img/maven_site_folder.png)  
 &nbsp;
 
 Parabéns, você acabou de gerar o último documento obrigatório desse projeto!  
